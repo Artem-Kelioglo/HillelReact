@@ -4,24 +4,26 @@ import ToDo from './components/ToDo/ToDo';
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [count, setCount] = useState(1);
+  const [todoNumber, setTodoNumber] = useState(1);
  
   useEffect(() => {
     async function getTodos() {
       try {
-        let response = await fetch(`https://jsonplaceholder.typicode.com/todos/${count.toString()}`);
+        let response = await fetch(`https://jsonplaceholder.typicode.com/todos/${todoNumber.toString()}`);
         let todosList =  await response.json()
         setTodos(prevState => [...prevState, todosList])
         console.log(todos)
       } catch (error) {
         console.error('Error fetching data:', error);
-      }
-      
+      } 
     }
     
+    getTodos();
+  }, [todoNumber])
+
+  useEffect(()=>{
     const handleClick = () => {
-      setCount(prevState => prevState + 1);
-      getTodos();  
+      setTodoNumber(prevState => prevState + 1);
     }
 
     window.addEventListener('click',handleClick);
@@ -29,7 +31,7 @@ function App() {
     return () => {
       window.removeEventListener('click', handleClick);
     };
-  },[count])
+  },[])
 
   return (
     <>
