@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
-import { Decrement, Increment } from "../action";
-import { DECREMENT, INCREMENT } from "../actionTypes";
+import { Decrement, Increment, Reset } from "../action";
+import { DECREMENT, INCREMENT, RESET } from "../actionTypes";
 
 export const CounterContext = createContext(null);
 
@@ -17,6 +17,9 @@ export const CounterProvider = ({ children }) => {
       case DECREMENT: return {
         count:store.count-1
       } 
+      case RESET: return {
+        count:0
+      } 
       default:
         return; 
     }
@@ -29,10 +32,14 @@ export const CounterProvider = ({ children }) => {
   const handleDecrement = () => {
     dispatch(Decrement())
   }
+  const handleReset = () => {
+    dispatch(Reset())
+  }
   
   const provideValue = {
     onIncrement: handleIncrement,
     onDecrement: handleDecrement,
+    onReset: handleReset,
     state
   }
   

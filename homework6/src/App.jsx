@@ -1,10 +1,11 @@
 import { useContext} from 'react'
 import './App.css'
-import { CounterContext } from './context/counterContext'
+import { CounterContext } from './context/CounterContext'
+
 
 function App() {
   
-  const {state,onIncrement,onDecrement} = useContext(CounterContext)
+  const {state,onIncrement,onDecrement,onReset} = useContext(CounterContext)
 
   return (
     <>
@@ -18,6 +19,9 @@ function App() {
         </button>
         <button onClick={onDecrement}>
         DECREMENT
+        </button>
+        <button onClick={onReset}>
+        RESET
         </button>
       </div>
 
